@@ -2,9 +2,10 @@ name: Per-branch Deployment Preview
 
 on:
   push:
-    branches:
-      - "!main"
-      - "**"
+    branches-ignore: 
+      - main  # Exclude main branch
+    branches: 
+      - '**'  # Include all branches
 
 jobs:
   deploy:
