@@ -24,4 +24,4 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           project-name: 'per-branch'
-          scope: "mavyfaby's projects"
+          scope: "mavyfaby"
