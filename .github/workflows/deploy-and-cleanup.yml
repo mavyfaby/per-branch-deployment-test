@@ -21,7 +21,7 @@ jobs:
       - name: Deploy project to Github Pages for preview
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           destination_dir: pr/${{ github.event.pull_request.number }}
 
