@@ -18,24 +18,13 @@ jobs:
       - name: Building project
         run: bun run build
 
-      - name: Deploy project to Github Pages for preview
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          destination_dir: pr/${{ github.event.pull_request.number }}
-
-  cleanup:
-    if: github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    steps:
-     - name: Checkout gh-pages branch
-       run: |
-          git clone --depth=1 --branch=gh-pages https://github.com/${{ github.repository }} gh-pages
-          cd gh-pages
-          rm -rf pr/${{ github.event.pull_request.number }}
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Cleanup: Remove PR #${{ github.event.pull_request.number }} preview"
-          git push
+      - name: Deploy branch to Netlify
+        env:
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: |
+          curl -X POST https://api.netlify.com/api/v1/sites/111c53d8-3527-4503-bc6a-153817c8e3ec/deploys \
+               -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+               -F "branch=${{ github.head_ref }}" \
+               -F "dir=./dist"
+      
+      
