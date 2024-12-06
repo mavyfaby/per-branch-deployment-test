@@ -11,7 +11,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="B1 branch" />
+  <HelloWorld msg="Im B2 branch" />
 </template>
 
 <style scoped>
